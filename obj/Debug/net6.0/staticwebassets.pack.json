@@ -1,8 +1,28 @@
 {
   "Files": [
     {
+      "Id": "C:\\Users\\ptrco\\.nuget\\packages\\datatables.net-bs5\\1.13.4\\contentFiles\\any\\any\\wwwroot\\css\\dataTables.bootstrap5.css",
+      "PackagePath": "staticwebassets\\css\\dataTables.bootstrap5.css"
+    },
+    {
+      "Id": "C:\\Users\\ptrco\\.nuget\\packages\\datatables.net-bs5\\1.13.4\\contentFiles\\any\\any\\wwwroot\\css\\dataTables.bootstrap5.min.css",
+      "PackagePath": "staticwebassets\\css\\dataTables.bootstrap5.min.css"
+    },
+    {
+      "Id": "C:\\Users\\ptrco\\.nuget\\packages\\datatables.net-bs5\\1.13.4\\contentFiles\\any\\any\\wwwroot\\js\\dataTables.bootstrap5.js",
+      "PackagePath": "staticwebassets\\js\\dataTables.bootstrap5.js"
+    },
+    {
+      "Id": "C:\\Users\\ptrco\\.nuget\\packages\\datatables.net-bs5\\1.13.4\\contentFiles\\any\\any\\wwwroot\\js\\dataTables.bootstrap5.min.js",
+      "PackagePath": "staticwebassets\\js\\dataTables.bootstrap5.min.js"
+    },
+    {
       "Id": "D:\\Work\\Card Validator\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\CardValidator.bundle.scp.css",
       "PackagePath": "staticwebassets\\CardValidator.bundle.scp.css"
+    },
+    {
+      "Id": "D:\\Work\\Card Validator\\wwwroot\\css\\datatables.min.css",
+      "PackagePath": "staticwebassets\\css\\datatables.min.css"
     },
     {
       "Id": "D:\\Work\\Card Validator\\wwwroot\\css\\jquery.toast.min.css",
@@ -15,6 +35,10 @@
     {
       "Id": "D:\\Work\\Card Validator\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "D:\\Work\\Card Validator\\wwwroot\\js\\datatables.min.js",
+      "PackagePath": "staticwebassets\\js\\datatables.min.js"
     },
     {
       "Id": "D:\\Work\\Card Validator\\wwwroot\\js\\jquery.toast.min.js",

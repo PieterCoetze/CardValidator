@@ -1,13 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "Tlbwq/Hvi4Pw87h0yYf258sqwecGH53RtDieDBVrf10P280IIcxbnbOAmQouAaGYI0PeSM9hlUF5YjpSgtkC9A==",
+  "dgSpecHash": "BzBkoacdd6jjG89dqvISkS64pXgea/I5fnW0yDd5s7X9fVD9Mz0V4UJRmDONl7m72lY4mlbX80qtsTp1tesC5g==",
   "success": true,
   "projectFilePath": "D:\\Work\\Card Validator\\CardValidator.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ptrco\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\ptrco\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
+    "C:\\Users\\ptrco\\.nuget\\packages\\bootstrap\\5.0.0\\bootstrap.5.0.0.nupkg.sha512",
     "C:\\Users\\ptrco\\.nuget\\packages\\creditcardvalidator\\3.0.1\\creditcardvalidator.3.0.1.nupkg.sha512",
+    "C:\\Users\\ptrco\\.nuget\\packages\\datatables.net\\1.12.1\\datatables.net.1.12.1.nupkg.sha512",
+    "C:\\Users\\ptrco\\.nuget\\packages\\datatables.net-bs5\\1.13.4\\datatables.net-bs5.1.13.4.nupkg.sha512",
     "C:\\Users\\ptrco\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\ptrco\\.nuget\\packages\\jquery\\1.7.0\\jquery.1.7.0.nupkg.sha512",
     "C:\\Users\\ptrco\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",
     "C:\\Users\\ptrco\\.nuget\\packages\\messagepack.annotations\\2.1.152\\messagepack.annotations.2.1.152.nupkg.sha512",
     "C:\\Users\\ptrco\\.nuget\\packages\\messagepackanalyzer\\2.1.152\\messagepackanalyzer.2.1.152.nupkg.sha512",

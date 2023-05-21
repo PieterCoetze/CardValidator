@@ -3,24 +3,18 @@
 @{
     ViewData["Title"] = "Index";
 }
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<button onclick="ShowModal()" class="btn btn-primary margin-ver">Add card</button>
+<table class="table dataTable">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.CardId)
+                Card Number
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CardProviderId)
+                Provider
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CardNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedDate)
+                Date Added
             </th>
             <th></th>
         </tr>
@@ -29,34 +23,52 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.CardId)
+                 @Html.DisplayFor(modelItem => item.CardNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CardProviderId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CardNumber)
+                @Html.DisplayFor(model => item.CardProvider.CardProviderName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CreatedDate)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                <a class="btn btn-danger btn-icon">
+                    <i class="fa fa-trash"></i>
+                </a>
             </td>
         </tr>
 }
     </tbody>
 </table>
 
-<form asp-controller="Card" asp-action="SaveCard" method="post">
-    <input type="number"  name="cardNumber" >
-    <button class="btn btn-primary" type="submit">Save</button>
-</form>
+<div class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <form asp-controller="Card" asp-action="SaveCard" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Add Card Number</h5>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="email">Card number:</label>
+                        <input type="number" name="cardNumber" class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-secondary" onclick="HideModal()">Close</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+
 
 @section Scripts{
-        <script type="text/javascript">
+    <script type="text/javascript">
         if ('@ViewBag.Message')
             showNotification('@ViewBag.Message');
     </script>

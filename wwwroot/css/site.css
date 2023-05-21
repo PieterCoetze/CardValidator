@@ -16,3 +16,11 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.margin-ver {
+    margin: 15px 0;
+}
+
+.margin-hor {
+    margin: 0 15px;
+}

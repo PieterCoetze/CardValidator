@@ -21,7 +21,7 @@ namespace CardValidator.Services
 
         public async Task<ICollection<Card>> GetCards()
         {
-            var cards = await _context.TCards.ToListAsync();
+            var cards = await _context.TCards.Include(c => c.CardProvider).ToListAsync();
 
             return cards;
         }
