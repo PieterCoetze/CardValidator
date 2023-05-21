@@ -1,0 +1,12 @@
+﻿@{  
+    ViewData["Title"] = "Card Providers";  
+}  
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <label  class="control-label"> Card</label>
+            <select name="cardProviderId" class="form-control" asp-items="@ViewBag.CardProviders"></select>
+        </div>
+    </div>
+</div>
