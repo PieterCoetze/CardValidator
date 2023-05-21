@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rSal77FOgXuB7lBBLUDaevJdmpxnEcD+lzsDXvNZkV2mHibpoKBzGEZALvN6XuQKwub+2vRURbN9Qw11QZWlPQ==",
+  "dgSpecHash": "Tlbwq/Hvi4Pw87h0yYf258sqwecGH53RtDieDBVrf10P280IIcxbnbOAmQouAaGYI0PeSM9hlUF5YjpSgtkC9A==",
   "success": true,
-  "projectFilePath": "D:\\Work\\Sandbox\\CardValidator\\CardValidator.csproj",
+  "projectFilePath": "D:\\Work\\Card Validator\\CardValidator.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ptrco\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\ptrco\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",

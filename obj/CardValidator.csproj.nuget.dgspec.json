@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Work\\Sandbox\\CardValidator\\CardValidator.csproj": {}
+    "D:\\Work\\Card Validator\\CardValidator.csproj": {}
   },
   "projects": {
-    "D:\\Work\\Sandbox\\CardValidator\\CardValidator.csproj": {
+    "D:\\Work\\Card Validator\\CardValidator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Work\\Sandbox\\CardValidator\\CardValidator.csproj",
+        "projectUniqueName": "D:\\Work\\Card Validator\\CardValidator.csproj",
         "projectName": "CardValidator",
-        "projectPath": "D:\\Work\\Sandbox\\CardValidator\\CardValidator.csproj",
+        "projectPath": "D:\\Work\\Card Validator\\CardValidator.csproj",
         "packagesPath": "C:\\Users\\ptrco\\.nuget\\packages\\",
-        "outputPath": "D:\\Work\\Sandbox\\CardValidator\\obj\\",
+        "outputPath": "D:\\Work\\Card Validator\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ptrco\\AppData\\Roaming\\NuGet\\NuGet.Config",
