@@ -6,5 +6,6 @@ namespace CardValidator.Interfaces
     {
         bool ValidateCard(string cardNumber);
         string GetCardProvider(string cardNumber);
+        bool CheckIfCardProviderValid(string cardProvider);
     }
 }

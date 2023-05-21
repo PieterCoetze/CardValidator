@@ -18,8 +18,12 @@ InitializeDataTable = () => {
 
 ShowModal = () => {
     $('.modal').modal('show');
-    },
+},
 
 HideModal = () => {
     $('.modal').modal('hide');
+},
+
+Redirect = (url) => {
+    location.href = url;
 }

@@ -13,14 +13,20 @@ namespace CardValidator.Controllers
         private readonly ICardService _cardService;
         private readonly ICardValiditorService _cardValiditorService;
         private readonly ICardProviderService _cardProviderService;
-        
-        public CardController(ICardService cardService, 
-                              ICardValiditorService cardValiditorService, 
-                              ICardProviderService cardProviderService)
+        private readonly IHttpContextAccessor _httpContext;
+        private readonly List<Validator> _validators;
+
+        public CardController(ICardService cardService,
+                              ICardValiditorService cardValiditorService,
+                              ICardProviderService cardProviderService,
+                              IHttpContextAccessor httpContext)
         {
             _cardService = cardService;
             _cardValiditorService = cardValiditorService;
             _cardProviderService = cardProviderService;
+            _httpContext = httpContext;
+            _validators = new List<Validator>();
+            _cardService.HttpContext = httpContext.HttpContext;
         }
 
         public async Task<IActionResult> Index()
@@ -35,35 +41,31 @@ namespace CardValidator.Controllers
 
             var cardProvider = await _cardProviderService.GetCardProvider(_cardValiditorService.GetCardProvider(cardNumber));
 
-            bool saved = await _cardService.SaveCard(new Dto.CardDTO
+            await _cardService.SaveCard(new Dto.CardDTO
             {
                 CardProviderId = cardProvider.CardProviderId,
                 CardNumber = cardNumber,
             });
 
-            if (saved) 
-                ViewBag.Message = "Card added, success";
-            else
-                ViewBag.Message = "Unable to add card, error";
+            return View("Index", await _cardService.GetCards());
+        }
+
+        public async Task<IActionResult> DeleteCard(int id)
+        {
+            await _cardService.DeleteCard(id);
 
             return View("Index", await _cardService.GetCards());
         }
 
         public bool Validate(string cardNumber)
         {
-            if (!_cardValiditorService.ValidateCard(cardNumber))
-            {
-                ViewBag.Message = "Invalid card number, error";
-                return false;
-            }
+            _validators.Add(new CardNumberValidate(_cardValiditorService, cardNumber, _httpContext.HttpContext));
+            _validators.Add(new ExistsValidate(_cardService, cardNumber, _httpContext.HttpContext));
+            _validators.Add(new ProviderConfiguredValidate(_cardValiditorService, cardNumber, _httpContext.HttpContext));
 
-            if (_cardService.CheckIfCardExists(cardNumber))
-            {
-                ViewBag.Message = "Card already exists, error";
-                return false;
-            }
+            CardValidate cardValidator = new CardValidate(_validators);
 
-            return true;
+            return cardValidator.Validate();
         }
     }
 }

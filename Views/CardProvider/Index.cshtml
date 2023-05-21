@@ -1,12 +1,51 @@
-﻿@{  
-    ViewData["Title"] = "Card Providers";  
+﻿@model IEnumerable<CardValidator.Models.CardProvider>
+@inject IHttpContextAccessor Accessor
+
+@{
+    ViewData["Title"] = "Card Providers";
+    string message = Accessor.HttpContext.Session.GetString("Message");
+    Accessor.HttpContext.Session.SetString("Message", string.Empty);
 }  
 
-<div class="row">
-    <div class="col-md-4">
-        <div class="form-group">
-            <label  class="control-label"> Card</label>
-            <select name="cardProviderId" class="form-control" asp-items="@ViewBag.CardProviders"></select>
-        </div>
-    </div>
-</div>
+<table class="table dataTable">
+    <thead>
+        <tr>
+            <th>
+                Card Provider
+            </th>
+            <th>
+                Enabled
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CardProviderName)
+                </td>
+                <td>
+                    @{
+                        bool configured = item.Configured ?? false;
+
+                        <input class="form-check-input" 
+                               type="checkbox" 
+                               id="check1" 
+                               name="option1" 
+                               value="something"
+                               onclick="Redirect('/cardProvider/EnableProvider?id=@item.CardProviderId&enable=@(!configured)')"
+                               @(configured ? "checked" : "")>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts{
+    <script type="text/javascript">
+        if ('@message')
+            showNotification('@message');
+    </script>
+}

@@ -1,10 +1,19 @@
 ﻿using CardValidator.Interfaces;
+using CardValidator.Models;
 using CreditCardValidator;
+using Microsoft.EntityFrameworkCore;
 
 namespace CardValidator.Services
 {
     public class CardValidatorService : ICardValiditorService
     {
+        private readonly DataBaseContext _context;
+
+        public CardValidatorService(DataBaseContext context)
+        {
+            _context = context;
+        }
+
         public string GetCardProvider(string cardNumber)
         {
             string cardProvider = cardNumber.CreditCardBrand().ToString();
@@ -23,6 +32,13 @@ namespace CardValidator.Services
                 return false;
 
             return true;
+        }
+
+        public bool CheckIfCardProviderValid(string cardNumber)
+        {
+            bool isValid =  _context.TCardProviders.Any(c => c.CardProviderName == GetCardProvider(cardNumber) && (c.Configured ?? false));
+
+            return isValid;
         }
     }
 }

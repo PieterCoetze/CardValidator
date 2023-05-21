@@ -2,6 +2,7 @@
 using CardValidator.Interfaces;
 using CardValidator.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace CardValidator.Services
 {
@@ -9,16 +10,26 @@ namespace CardValidator.Services
     {
         private readonly DataBaseContext _context;
 
-        public CardService(DataBaseContext context)
+        public HttpContext HttpContext { get; set; }
+
+        public CardService(DataBaseContext context, HttpContext httpContext = null)
         {
             _context = context;
+            HttpContext = httpContext;
+        }
+
+        public async Task<Card> GetCard(int id)
+        {
+            var card = await _context.TCards.Where(x => x.CardId == id).FirstOrDefaultAsync();
+
+            return card;
         }
 
         public bool CheckIfCardExists(string cardNumber)
         {
             return _context.TCards.Any(c => c.CardNumber == cardNumber);
         }
-
+       
         public async Task<ICollection<Card>> GetCards()
         {
             var cards = await _context.TCards.Include(c => c.CardProvider).ToListAsync();
@@ -37,7 +48,34 @@ namespace CardValidator.Services
             
             _context.TCards.Add(card);
 
-            return _context.SaveChanges() > 0;
+            if (_context.SaveChanges() > 0)
+            {
+                HttpContext.Session.SetString("Message", "Card added, success");
+                return true;
+            }
+            else
+            {
+                HttpContext.Session.SetString("Message", "Unable to add card, error, error");
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteCard(int id)
+        {
+            var card = await GetCard(id);
+
+            _context.Entry(card).State = EntityState.Deleted;
+
+            if(_context.SaveChanges() > 0)
+            {
+                HttpContext.Session.SetString("Message", "Card deleted, success");
+                return true;
+            }
+            else
+            {
+                HttpContext.Session.SetString("Message", "Card could not be deleted, error");
+                return false;
+            }
         }
     }
 }

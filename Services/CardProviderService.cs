@@ -8,6 +8,7 @@ namespace CardValidator.Services
     public class CardProviderService : ICardProviderService
     {
         private readonly DataBaseContext _context;
+        public HttpContext HttpContext { get; set; }
 
         public CardProviderService(DataBaseContext context)
         {
@@ -35,16 +36,23 @@ namespace CardValidator.Services
             return cardProviders;
         }
 
-        public async Task<bool> SetCardProviderConfiguration(int id, bool config)
+        public async Task SetCardProviderConfiguration(int id, bool config)
         {
             var cardProvider = await GetCardProvider(id);
+            string configuration = config ? "enabled" : "disabled";
 
             if (cardProvider == null)
-                return false;
+            {
+                HttpContext.Session.SetString("Message", $"{cardProvider.CardProviderName} {configuration}, error");
+                return;
+            }
 
             cardProvider.Configured = config;
 
-            return _context.SaveChanges() > 0;
+            if(!(_context.SaveChanges() > 0))
+                HttpContext.Session.SetString("Message", $"{cardProvider.CardProviderName} {configuration}, error");
+
+            HttpContext.Session.SetString("Message", $"{cardProvider.CardProviderName} {configuration}, success");
         }
     }
 }
