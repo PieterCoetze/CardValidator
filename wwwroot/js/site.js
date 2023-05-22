@@ -13,7 +13,9 @@ const showNotification = (message) => {
 },
 
 InitializeDataTable = () => {
-    $('.dataTable').DataTable();
+    $('.dataTable').DataTable({
+        "iDisplayLength": 25
+    });
 },
 
 ShowModal = () => {
