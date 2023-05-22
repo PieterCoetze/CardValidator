@@ -18,23 +18,17 @@ namespace CardValidator.Services
 
         public async Task<CardProvider?> GetCardProvider(int id)
         {
-            var cardProvider = await _context.TCardProviders.Where(c => c.CardProviderId == id).FirstOrDefaultAsync();
-
-            return cardProvider;
+            return await _context.TCardProviders.Where(c => c.CardProviderId == id).FirstOrDefaultAsync();
         }
 
         public async Task<CardProvider?> GetCardProvider(string providerName)
         {
-            var cardProvider = await _context.TCardProviders.Where(c => c.CardProviderName == providerName).FirstOrDefaultAsync();
-
-            return cardProvider;
+            return await _context.TCardProviders.Where(c => c.CardProviderName == providerName).FirstOrDefaultAsync();
         }
 
         public async Task<ICollection<CardProvider>> GetCardProviders()
         {
-            var cardProviders = await _context.TCardProviders.ToListAsync();
-
-            return cardProviders;
+            return await _context.TCardProviders.ToListAsync();
         }
 
         public async Task SetCardProviderConfiguration(int id, bool config)
@@ -44,16 +38,16 @@ namespace CardValidator.Services
 
             if (cardProvider == null)
             {
-                _httpContext.HttpContext.Session.SetString("Message", $"{cardProvider.CardProviderName} {configuration}, error");
+                _httpContext.HttpContext?.Session.SetString("Message", $"{cardProvider?.CardProviderName} {configuration}, error");
                 return;
             }
 
             cardProvider.Configured = config;
 
             if(!(_context.SaveChanges() > 0))
-                _httpContext.HttpContext.Session.SetString("Message", $"{cardProvider.CardProviderName} {configuration}, error");
+                _httpContext.HttpContext?.Session.SetString("Message", $"{cardProvider.CardProviderName} {configuration}, error");
 
-            _httpContext.HttpContext.Session.SetString("Message", $"{cardProvider.CardProviderName} {configuration}, success");
+            _httpContext.HttpContext?.Session.SetString("Message", $"{cardProvider.CardProviderName} {configuration}, success");
         }
     }
 }

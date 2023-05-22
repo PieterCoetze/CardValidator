@@ -19,9 +19,7 @@ namespace CardValidator.Services
 
         public async Task<Card> GetCard(int id)
         {
-            var card = await _context.TCards.Where(x => x.CardId == id).FirstOrDefaultAsync();
-
-            return card;
+            return await _context.TCards.Where(x => x.CardId == id).FirstOrDefaultAsync();
         }
 
         public bool CheckIfCardExists(string cardNumber)
@@ -31,12 +29,10 @@ namespace CardValidator.Services
        
         public async Task<ICollection<Card>> GetCards()
         {
-            var cards = await _context.TCards.Include(c => c.CardProvider).ToListAsync();
-
-            return cards;
+            return await _context.TCards.Include(c => c.CardProvider).ToListAsync();
         }
 
-        public async Task<bool> SaveCard(CardDTO cardDTO)
+        public async Task SaveCard(CardDTO cardDTO)
         {
             Card card = new Card()
             {
@@ -47,34 +43,22 @@ namespace CardValidator.Services
             
             _context.TCards.Add(card);
 
-            if (_context.SaveChanges() > 0)
-            {
-                _httpContext.HttpContext.Session.SetString("Message", "Card added, success");
-                return true;
-            }
+            if (await _context.SaveChangesAsync() > 0)
+                _httpContext.HttpContext?.Session.SetString("Message", "Card added, success");
             else
-            {
-                _httpContext.HttpContext.Session.SetString("Message", "Unable to add card, error, error");
-                return false;
-            }
+                _httpContext.HttpContext?.Session.SetString("Message", "Unable to add card, error, error");
         }
 
-        public async Task<bool> DeleteCard(int id)
+        public async Task DeleteCard(int id)
         {
             var card = await GetCard(id);
 
             _context.Entry(card).State = EntityState.Deleted;
 
             if(_context.SaveChanges() > 0)
-            {
-                _httpContext.HttpContext.Session.SetString("Message", "Card deleted, success");
-                return true;
-            }
+                _httpContext.HttpContext?.Session.SetString("Message", "Card deleted, success");
             else
-            {
-                _httpContext.HttpContext.Session.SetString("Message", "Card could not be deleted, error");
-                return false;
-            }
+                _httpContext.HttpContext?.Session.SetString("Message", "Card could not be deleted, error");
         }
     }
 }

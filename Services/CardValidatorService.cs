@@ -16,19 +16,14 @@ namespace CardValidator.Services
 
         public string GetCardProvider(string cardNumber)
         {
-            string cardProvider = cardNumber.CreditCardBrand().ToString();
-
-            return cardProvider;
+            return cardNumber.CreditCardBrand().ToString();
         }
 
         public bool ValidateCard(string cardNumber)
         {
             if (!double.TryParse(cardNumber, out _))
                 return false;
-
-            string cardProvider = cardNumber.CreditCardBrand().ToString();
-
-            if (cardProvider.ToLower() == "unknown")
+            else if (cardNumber.CreditCardBrand().ToString().ToLower() == "unknown")
                 return false;
 
             return true;
@@ -36,9 +31,7 @@ namespace CardValidator.Services
 
         public bool CheckIfCardProviderValid(string cardNumber)
         {
-            bool isValid =  _context.TCardProviders.Any(c => c.CardProviderName == GetCardProvider(cardNumber) && (c.Configured ?? false));
-
-            return isValid;
+            return _context.TCardProviders.Any(c => c.CardProviderName == GetCardProvider(cardNumber) && (c.Configured ?? false));
         }
     }
 }

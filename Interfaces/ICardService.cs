@@ -7,8 +7,8 @@ namespace CardValidator.Interfaces
     {
         Task<ICollection<Card>> GetCards();
         Task<Card> GetCard(int id);
-        Task<bool> SaveCard(CardDTO cardDTO);
+        Task SaveCard(CardDTO cardDTO);
         bool CheckIfCardExists(string cardNumber);
-        Task<bool> DeleteCard(int id);
+        Task DeleteCard(int id);
     }
 }

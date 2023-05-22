@@ -1,10 +1,12 @@
 ﻿@model IEnumerable<CardValidator.Models.Card>
 @inject IHttpContextAccessor Accessor
+
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Cards";
     string message = Accessor.HttpContext.Session.GetString("Message");
     Accessor.HttpContext.Session.SetString("Message", string.Empty);
 }
+
 <button onclick="ShowModal()" class="btn btn-primary margin-ver">Add card</button>
 <table class="table dataTable">
     <thead>
