@@ -1,6 +1,6 @@
 ﻿using CardValidator.Interfaces;
 
-namespace CardValidator
+namespace CardValidator.Services
 {
     public class CardValidate : Validator
     {

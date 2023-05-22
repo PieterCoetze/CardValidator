@@ -1,4 +1,4 @@
-﻿namespace CardValidator
+﻿namespace CardValidator.Services
 {
     public abstract class Validator
     {

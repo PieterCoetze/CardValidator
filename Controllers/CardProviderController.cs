@@ -7,13 +7,10 @@ namespace CardValidator.Controllers
     public class CardProviderController : Controller
     {
         private readonly ICardProviderService _cardProviderService;
-        private readonly IHttpContextAccessor _httpContext;
 
-        public CardProviderController(ICardProviderService cardProviderService, IHttpContextAccessor httpContext)
+        public CardProviderController(ICardProviderService cardProviderService)
         {
             _cardProviderService = cardProviderService;
-            _httpContext = httpContext;
-            _cardProviderService.HttpContext = httpContext.HttpContext;
         }
 
         public async Task<IActionResult> Index()

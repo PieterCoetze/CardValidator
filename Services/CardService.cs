@@ -9,13 +9,12 @@ namespace CardValidator.Services
     public class CardService : ICardService
     {
         private readonly DataBaseContext _context;
+        private readonly IHttpContextAccessor _httpContext;
 
-        public HttpContext HttpContext { get; set; }
-
-        public CardService(DataBaseContext context, HttpContext httpContext = null)
+        public CardService(DataBaseContext context, IHttpContextAccessor httpContext)
         {
             _context = context;
-            HttpContext = httpContext;
+            _httpContext = httpContext;
         }
 
         public async Task<Card> GetCard(int id)
@@ -50,12 +49,12 @@ namespace CardValidator.Services
 
             if (_context.SaveChanges() > 0)
             {
-                HttpContext.Session.SetString("Message", "Card added, success");
+                _httpContext.HttpContext.Session.SetString("Message", "Card added, success");
                 return true;
             }
             else
             {
-                HttpContext.Session.SetString("Message", "Unable to add card, error, error");
+                _httpContext.HttpContext.Session.SetString("Message", "Unable to add card, error, error");
                 return false;
             }
         }
@@ -68,12 +67,12 @@ namespace CardValidator.Services
 
             if(_context.SaveChanges() > 0)
             {
-                HttpContext.Session.SetString("Message", "Card deleted, success");
+                _httpContext.HttpContext.Session.SetString("Message", "Card deleted, success");
                 return true;
             }
             else
             {
-                HttpContext.Session.SetString("Message", "Card could not be deleted, error");
+                _httpContext.HttpContext.Session.SetString("Message", "Card could not be deleted, error");
                 return false;
             }
         }

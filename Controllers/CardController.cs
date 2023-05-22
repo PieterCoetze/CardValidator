@@ -14,7 +14,7 @@ namespace CardValidator.Controllers
         private readonly ICardValiditorService _cardValiditorService;
         private readonly ICardProviderService _cardProviderService;
         private readonly IHttpContextAccessor _httpContext;
-        private readonly List<Validator> _validators;
+        private readonly List<Services.Validator> _validators;
 
         public CardController(ICardService cardService,
                               ICardValiditorService cardValiditorService,
@@ -25,8 +25,7 @@ namespace CardValidator.Controllers
             _cardValiditorService = cardValiditorService;
             _cardProviderService = cardProviderService;
             _httpContext = httpContext;
-            _validators = new List<Validator>();
-            _cardService.HttpContext = httpContext.HttpContext;
+            _validators = new List<Services.Validator>();
         }
 
         public async Task<IActionResult> Index()
@@ -41,7 +40,7 @@ namespace CardValidator.Controllers
 
             var cardProvider = await _cardProviderService.GetCardProvider(_cardValiditorService.GetCardProvider(cardNumber));
 
-            await _cardService.SaveCard(new Dto.CardDTO
+            await _cardService.SaveCard(new CardDTO
             {
                 CardProviderId = cardProvider.CardProviderId,
                 CardNumber = cardNumber,
